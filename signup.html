@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sign up</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../src/styles.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../src/styles_1.css">
+
+    </head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="name col-xxl-1">
+                <h1>Eventify</h1>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-1 gy-5">
+            <h4>Sign up.</h4>
+        </div>
+    </div>
+    <div class="container">
+        <form id="signupForm">
+            <!-- <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+            </div> -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <button type="submit" class="btn btn-success">Sign Up</button>
+        </form>
+        <p class="mt-3">Already have an account? <a href="login.html">Sign In</a></p>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Ideally, send this data to your backend to store it
+            alert('Account created successfully! Now you can Sign In.');
+            window.location.href = 'login.html';
+        });
+    </script>
+    <script>
+        // Adding functionality for the Sign-Up button
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the form from refreshing the page
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+    
+            // Simulate storing data locally (or send it to a backend API)
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+    
+            // Alert the user and redirect
+            alert('You have signed up successfully! Now you can sign in.');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>
