@@ -1,0 +1,70 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "abenezer@example.com",
+      "password": "password123"
+    },
+    {
+      "id": "2",
+      "email": "mamo@example.com",
+      "password": "securepass"
+    },
+    {
+      "id": "3",
+      "email": "kena@example.com",
+      "password": "mypassword"
+    },
+    {
+      "id": "4",
+      "email": "abiy@example.com",
+      "password": "pass1234"
+    }
+  ],
+  "events": [
+    {
+      "id": "1",
+      "name": "Birthday Party",
+      "invitedBy": "Tselot Million",
+      "location": "Addis Ababa",
+      "date": "2025-04-08",
+      "time": "3:00 PM",
+      "peopleInvited": 50,
+      "image": "wedding.jpg",
+      "status": "RSVP"
+    },
+    {
+      "id": "2",
+      "name": "Wedding Ceremony",
+      "invitedBy": "Jane Smith",
+      "location": "Los Angeles",
+      "date": "2025-03-10",
+      "time": "7:00 PM",
+      "peopleInvited": 100,
+      "image": "birthday.jpg",
+      "status": "Declined"
+    },
+    {
+      "id": "3",
+      "name": "Tech Conference",
+      "invitedBy": "Mark Zuckerberg",
+      "location": "San Francisco",
+      "date": "2025-05-12",
+      "time": "9:00 AM",
+      "peopleInvited": 500,
+      "image": "tech.jpg",
+      "status": "RSVP"
+    },
+    {
+      "id": "4",
+      "name": "Summer BBQ",
+      "invitedBy": "Tom Cruise",
+      "location": "Miami",
+      "date": "2025-06-22",
+      "time": "12:00 PM",
+      "peopleInvited": 200,
+      "image": "bbq.jpg",
+      "status": "RSVP"
+    }
+  ]
+}
