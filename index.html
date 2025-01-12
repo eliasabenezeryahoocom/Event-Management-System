@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Eventify</h1>
+        <a href="index.html" class="btn btn-success">Home</a><br>
+        <a href="html/invites.html" class="btn btn-success">Invites</a><br>
+        <!-- Add logout button -->
+        <button id="logoutBtn" class="btn btn-danger">Logout</button>
+    </div>
+    <div class="main">
+        <h2>Your Events</h2>
+        <button class="add-btn btn btn-success" onclick="openPopup()">+ Add Event</button>
+        <div class="events-list" id="eventsList"></div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Add Event Popup -->
+    <div class="popup" id="popup">
+        <label for="eventName">Event Name:</label>
+        <input type="text" id="eventName" class="form-control" required>
+        <label for="eventDetails">Event Details:</label>
+        <textarea id="eventDetails" class="form-control" rows="3" required></textarea>
+        <label for="eventDate">Event Date:</label>
+        <input type="date" id="eventDate" class="form-control" required>
+        <label for="eventLocation">Location:</label>
+        <input type="text" id="eventLocation" class="form-control" required>
+        <label for="eventTime">Time:</label>
+        <input type="time" id="eventTime" class="form-control" required>
+        <label for="eventPeople">Number of People:</label>
+        <input type="number" id="eventPeople" class="form-control" required>
+        <button class="choose-btn btn btn-primary" onclick="openRecipientPopup()">Choose Recipient</button>
+    </div>
+
+    <!-- Recipient Selection Popup -->
+    <div class="recipient-popup" id="recipientPopup">
+        <h3>Send To:</h3>
+        <ul id="recipientList"></ul>
+        <button class="send-btn btn btn-success" onclick="sendEvent()">Send</button>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Check if the user is logged in when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('authToken'); // Get the auth token from localStorage
+
+            if (!token) {
+                // If no token is found, redirect to login page
+                window.location.href = "html/signup.html";
+            } else {
+                // User is logged in, fetch and display events
+                fetchEvents(token);
+
+                // Add logout event listener
+                document.getElementById('logoutBtn').addEventListener('click', () => {
+                    localStorage.removeItem('authToken'); // Remove the auth token
+                    window.location.href = "html/signuo.html"; // Redirect to login page
+                });
+            }
+        });
+
+        // Fetch events for the logged-in user
+        function fetchEvents(token) {
+            fetch("http://localhost:3000/events", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`, // Send the token in the Authorization header
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayEvents(data.events);
+                } else {
+                    alert("Failed to fetch events.");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching events:", error);
+                alert("An error occurred while fetching events.");
+            });
+        }
+
+        // Display the fetched events
+        function displayEvents(events) {
+            const eventsList = document.getElementById("eventsList");
+            eventsList.innerHTML = ''; // Clear the list before adding events
+            events.forEach(event => {
+                const eventElement = document.createElement("div");
+                eventElement.classList.add("event");
+                eventElement.innerHTML = `
+                    <h3>${event.name}</h3>
+                    <p>${event.details}</p>
+                    <p>${event.date} at ${event.time}</p>
+                    <p>Location: ${event.location}</p>
+                    <p>Number of people: ${event.people}</p>
+                `;
+                eventsList.appendChild(eventElement);
+            });
+        }
+    </script>
+</body>
+</html>
